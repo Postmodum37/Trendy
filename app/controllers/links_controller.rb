@@ -6,7 +6,7 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    @links = Link.all
+    @links = Link.paginate(:page => params[:page], :per_page => 25)
   end
 
   # GET /links/1
