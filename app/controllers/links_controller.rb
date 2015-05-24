@@ -1,12 +1,13 @@
 class LinksController < ApplicationController
+  before_filter :authenticate_user!, :except => [:index, :show]
   before_action :set_link, only: [:show, :edit, :update, :destroy]
   before_action :authorized_user, only: [:edit, :update, :destroy]
-  before_filter :authenticate_user!, :except => [:index, :show]
+  
 
   # GET /links
   # GET /links.json
   def index
-    @links = Link.paginate(:page => params[:page], :per_page => 3)
+    @links = Link.paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /links/1
