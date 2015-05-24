@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+
+gem 'private_pub'
+gem 'thin'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 gem 'acts_as_votable'

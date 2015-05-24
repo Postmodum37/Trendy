@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :comments
   devise_for :users
   resources :links
-
+  resources :registered_users
 
   resources :links do
     member do
@@ -10,6 +10,10 @@ Rails.application.routes.draw do
       put "dislike", to: "links#downvote"
     end
     resources :comments
+  end
+  
+  resources :conversations do
+    resources :messages
   end
 
   root "links#index"

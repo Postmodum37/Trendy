@@ -1,0 +1,32 @@
+
+<div class="row">
+  <div class="col-md-6">
+    <div style="height: 300px; overflow-y: auto;">
+      <div class="panel panel-default">
+        <div class="panel-heading">Registered Users</div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+            <tr>
+              <td><%= user.id %><br/></td>
+              <td><%= user.name %><br/></td>
+              <td><%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
+                    "data-sid" => current_user.id, "data-rip" => user.id %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>    
+  </div>
+</div>
+
+<% @users.each do |user| %>
+<% end %>
