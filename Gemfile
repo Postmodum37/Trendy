@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 
+gem 'pg'
 gem 'private_pub'
 gem 'thin'
 gem 'autoprefixer-rails'

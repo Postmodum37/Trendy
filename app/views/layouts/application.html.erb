@@ -12,10 +12,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<header class="navbar navbar-inverse" role="navigation">
+  <header class="navbar navbar-inverse" role="navigation">
     <div class="navbar-inner">
       <div class="container">
-        <div id="logo" class="navbar-brand"><%= link_to "Trendy", root_path %></div>
+        <div id="logo"><%= link_to "Trendy", root_path, :class => 'navbar-brand'%></div>
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
         	<% if user_signed_in? -%>
 						<ul class="nav navbar-nav navbar-right">
@@ -34,7 +34,18 @@
       </div>
     </div>
   </header>
-
+  <div class="jumbotron">
+  	<div class="container">
+  		<h1>Trendy - Your daily dose of Internet awesomeness!</h1>
+  		<% if user_signed_in? -%>
+  			<p>As we can see, you are not new here! Great! Submit, comment, chat and just have a great time!</p>
+  			<%= link_to 'Submit a new link!', new_link_path, :class => 'btn btn-large btn-primary' %>
+  		<% else -%>
+  			<p>Welcome traveller! This is Trendy - the newspaper of the Internet. Join us and start sharing your links, comment them and chat with other people!</p>
+  			<%= link_to 'Sign up!', new_user_registration_path, :class => 'btn btn-large btn-primary' %>
+  		<% end -%>
+  	</div>
+  </div>
 	<div id="main_content" class="container">
 		<% flash.each do |name, msg| %>
 			<%= content_tag(:div, msg, class: "alert alert-info") %>
