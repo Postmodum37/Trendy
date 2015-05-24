@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'autoprefixer-rails'
+gem 'bootstrap-sass'
 gem 'acts_as_votable'
 gem 'will_paginate'
 gem 'simple_form'
