@@ -12,7 +12,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header class="navbar navbar-inverse" role="navigation">
+  <header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
       <div class="container">
         <div id="logo"><%= link_to "Trendy", root_path, :class => 'navbar-brand'%></div>
@@ -34,6 +34,7 @@
       </div>
     </div>
   </header>
+  <div class="container">
   <div class="jumbotron">
   	<div class="container">
   		<h1>Trendy - Your daily dose of Internet awesomeness!</h1>
@@ -46,6 +47,7 @@
   		<% end -%>
   	</div>
   </div>
+
 	<div id="main_content" class="container">
 		<% flash.each do |name, msg| %>
 			<%= content_tag(:div, msg, class: "alert alert-info") %>
@@ -55,5 +57,13 @@
 			<%= yield %>
 		</div>
 	</div>
+  <hr>
+  
+  <div id="footer">
+      <div class="container">
+        <p class="muted credit">Created by <a href="https://github.com/Postmodum37">Tomukas</a>.</p>
+      </div>
+    </div>
+    </div>
 </body>
 </html>

@@ -6,7 +6,7 @@
 		</div>
 
 		<div class="btn-group pull-right">
-			<% if comment.user == current_user || current_user.admin? -%>
+			<% if comment.user == current_user || current_user.try(:admin?) -%>
 				<%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-default" %>
 			<% end %>
 		</div>
