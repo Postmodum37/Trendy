@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'acts_as_votable'
 gem 'will_paginate'
 gem 'simple_form'
 gem 'devise'
