@@ -60,6 +60,10 @@ class LinksController < ApplicationController
     if @link.nil?
       @link = Link.find(params[:id])
     end
+    #@comments = Comment.find_by_link_id(params[:id])
+    #@comments.each do |comment|
+    #  comment.destroy
+    #end
     @link.destroy
     respond_to do |format|
       format.html { redirect_to links_url, notice: 'Link was successfully destroyed.' }
