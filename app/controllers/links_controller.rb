@@ -22,6 +22,9 @@ class LinksController < ApplicationController
 
   # GET /links/1/edit
   def edit
+    if @link.nil?
+      @link = Link.find(params[:id])
+    end
   end
 
   # POST /links
@@ -43,6 +46,9 @@ class LinksController < ApplicationController
   # PATCH/PUT /links/1
   # PATCH/PUT /links/1.json
   def update
+    if @link.nil?
+      @link = Link.find(params[:id])
+    end
     respond_to do |format|
       if @link.update(link_params)
         format.html { redirect_to @link, notice: 'Link was successfully updated.' }
