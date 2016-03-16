@@ -1,6 +1,8 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  user: postgres
+  password: ksenija13
   pool: 5
 
 development:
