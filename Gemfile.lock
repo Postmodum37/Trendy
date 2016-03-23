@@ -41,6 +41,7 @@ GEM
     arel (6.0.3)
     autoprefixer-rails (6.3.3.1)
       execjs
+    awesome_print (1.6.1)
     bcrypt (3.1.10)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
@@ -119,6 +120,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -205,6 +208,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_votable
   autoprefixer-rails
+  awesome_print
   bootstrap-sass
   byebug
   coffee-rails
@@ -214,6 +218,7 @@ DEPENDENCIES
   pg
   private_pub
   pry
+  quiet_assets
   rails
   sass-rails
   sdoc
