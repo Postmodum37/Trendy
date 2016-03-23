@@ -2,12 +2,12 @@ class LinksController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
   before_action :set_link, only: [:show, :edit, :update, :destroy]
   before_action :authorized_user, only: [:edit, :update, :destroy]
-  
+
 
   # GET /links
   # GET /links.json
   def index
-    @links = Link.paginate(:page => params[:page], :per_page => 10)
+    @links = Link.paginate(:page => params[:page], :per_page => 10).order(created_at: :desc)
   end
 
   # GET /links/1
@@ -82,7 +82,7 @@ class LinksController < ApplicationController
     @link.upvote_by current_user
     redirect_to :back
   end
-   
+
   def downvote
     @link = Link.find(params[:id])
     @link.downvote_by current_user
@@ -103,6 +103,6 @@ class LinksController < ApplicationController
     def authorized_user
       @link = current_user.links.find_by(id: params[:id])
       #redirect_to links_path, notice: "Not authorized to edit this link" if @link.nil? || current_user.try(:admin?)
-      redirect_to :links_path unless user_signed_in? || current_user.admin? 
+      redirect_to :links_path unless user_signed_in? || current_user.admin?
     end
 end
