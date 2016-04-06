@@ -11,6 +11,10 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     # Examples
+    labels:
+      message:
+        new:
+          submit: "Send Message"
     # labels:
     #   defaults:
     #     password: 'Password'

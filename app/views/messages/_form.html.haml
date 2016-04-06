@@ -1,0 +1,18 @@
+= simple_form_for(@message, html: { class: 'form-vertical' } ) do |f|
+  - if @message.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@message.errors.count, "error")
+        prohibited this message from being saved:
+      %ul
+        - @message.errors.full_messages.each do |message|
+          %li= message
+  .col-md-6
+    = f.input :recipient_id, as: :select, collection: User.exclude_self(current_user.id).map { |u| [u.name, u.id] }, include_blank: false
+  .col-md-6
+    = f.input :message_heading
+  .col-md-12
+    = f.input :message_text
+
+  .col-md-6
+    = f.button :submit, 'Send Message', input_html: { class: 'btn btn-sm btn-primary' }

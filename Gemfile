@@ -31,6 +31,8 @@ gem 'turbolinks'
 gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', group: :doc
+gem 'haml'
+gem 'haml-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -54,4 +56,5 @@ end
 
 group :development do
   gem 'web-console'
+  gem 'erb2haml'
 end

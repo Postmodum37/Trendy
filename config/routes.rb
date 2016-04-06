@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   resources :comments
+  resources :messages, only: [:index, :new, :show, :create] do
+    collection do
+      get 'sent'
+    end
+  end
+
   devise_for :users
   resources :links
   resources :registered_users
@@ -10,10 +16,6 @@ Rails.application.routes.draw do
       put "dislike", to: "links#downvote"
     end
     resources :comments
-  end
-  
-  resources :conversations do
-    resources :messages
   end
 
   root "links#index"

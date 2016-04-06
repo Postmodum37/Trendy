@@ -1,0 +1,10 @@
+= simple_form_for(@message, html: { class: 'form-vertical' } ) do |f|
+  .row
+    .col-md-6
+      = f.input :recipient_id, as: :select, collection: User.exclude_self(current_user.id).map { |u| [u.name, u.id] }, include_blank: false, disabled: true
+  .row
+    .col-md-6
+      = f.input :message_heading, disabled: true
+  .row
+    .col-md-12
+      = f.input :message_text, disabled: true
