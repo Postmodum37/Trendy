@@ -15,3 +15,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+
+# Atom
+.tags*
+.haml-lint.yml
+.rubocop.yml

@@ -1,10 +1,19 @@
 = simple_form_for(@message, html: { class: 'form-vertical' } ) do |f|
   .row
     .col-md-6
-      = f.input :recipient_id, as: :select, collection: User.exclude_self(current_user.id).map { |u| [u.name, u.id] }, include_blank: false, disabled: true
+      - if @message.recipient_id == current_user.id
+        = f.input :recipient_id, as: :select, collection: User.exclude_self(current_user.id).map { |u| [u.name, u.id] }, include_blank: false, disabled: true, label: 'Sender'
+      - else
+        = f.input :recipient_id, as: :select, collection: User.exclude_self(current_user.id).map { |u| [u.name, u.id] }, include_blank: false, disabled: true
   .row
     .col-md-6
       = f.input :message_heading, disabled: true
   .row
     .col-md-12
       = f.input :message_text, disabled: true
+
+  - if @message.recipient_id == current_user.id
+    = link_to 'Reply', new_message_path(message: { recipient_id: @message.user_id,
+                                                   message_heading: "RE: #{@message.message_heading}",
+                                                   message_text: "\n" + '-------------------------------' + "\n" + @message.message_text + "\n" + '-------------------------------' + "\n" }),
+                                                   class: 'btn btn-sm btn-primary'

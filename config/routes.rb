@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   resources :comments
-  resources :messages, only: [:index, :new, :show, :create] do
-    collection do
-      get 'sent'
-    end
-  end
+  resources :messages, only: [:index, :new, :show, :create]
 
   devise_for :users
   resources :links
@@ -12,17 +8,17 @@ Rails.application.routes.draw do
 
   resources :links do
     member do
-      put "like", to: "links#upvote"
-      put "dislike", to: "links#downvote"
+      put 'like', to: 'links#upvote'
+      put 'dislike', to: 'links#downvote'
     end
     resources :comments
   end
 
-  root "links#index"
+  root 'links#index'
   # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  # See how all your routes lay out with 'rake routes'.
 
-  # You can have the root of your site routed with "root"
+  # You can have the root of your site routed with 'root'
   # root 'welcome#index'
 
   # Example of regular route:

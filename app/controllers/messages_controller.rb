@@ -1,15 +1,12 @@
 class MessagesController < ApplicationController
 
-  before_filter :authenticate_user!
-  before_action :set_message, only: [ :show ]
-  before_action :authorized_user, only: [ :show, :new, :create, :index, :sent ]
+  before_action :authenticate_user!
+  before_action :set_message, only: [:show]
+  before_action :authorized_user, only: [:show, :new, :create, :index, :sent]
 
   def index
-    @messages = current_user.recieved_messages.paginate(:page => params[:page], :per_page => 10).order(created_at: :desc)
-  end
-
-  def sent
-    @messages = current_user.sent_messages.paginate(:page => params[:page], :per_page => 10).order(created_at: :desc)
+    @recieved_messages = current_user.recieved_messages.paginate(:page => params[:page], :per_page => 10).order(created_at: :desc)
+    @sent_messages = current_user.sent_messages.paginate(:page => params[:page], :per_page => 10).order(created_at: :desc)
   end
 
   def show
@@ -17,13 +14,16 @@ class MessagesController < ApplicationController
   end
 
   def new
-    @message = Message.new
+    if !params[:message].blank?
+      @message = Message.new(message_params)
+    else
+      @message = Message.new
+    end
   end
 
   def create
     @message = Message.new(message_params)
     @message.user_id = current_user.id
-
     respond_to do |format|
       if @message.save
         format.html { redirect_to messages_path, notice: 'Message was successfully sent.' }

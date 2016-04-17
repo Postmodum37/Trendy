@@ -23,29 +23,34 @@
                 %li= link_to 'Submit link', new_link_path
                 %li= link_to 'Account', edit_user_registration_path
                 %li= link_to 'Sign out', destroy_user_session_path, :method => :delete
+                %li= link_to "Welcome, #{current_user.name}", '#'
             - else
               %ul.nav.navbar-nav.pull-right
-                %li= link_to 'Sign up', new_user_registration_path
+                -# %li= link_to 'Sign up', new_user_registration_path
                 %li= link_to 'Sign in', new_user_session_path
-    .container
-      .jumbotron
-        .container
-          %h1 Trendy - Your daily dose of Internet awesomeness!
-          - if user_signed_in?
-            %p As we can see, you are not new here! Great! Submit, comment, chat and just have a great time!
-            = link_to 'Submit a new link!', new_link_path, :class => 'btn btn-large btn-primary'
-          - else
-            %p Welcome traveller! This is Trendy - the newspaper of the Internet. Join us and start sharing your links, comment them and chat with other people!
-            = link_to 'Sign up!', new_user_registration_path, :class => 'btn btn-large btn-primary'
-      #main_content.container
-        - flash.each do |name, msg|
-          = content_tag(:div, msg, class: "alert alert-info")
-        #content.col-md-9.center-block
-          = yield
+    .jumbotron
+      .container
+        %h1 Trendy - Your daily dose of Internet awesomeness!
+        - if user_signed_in?
+          %p As we can see, you are not new here! Great! Submit, comment, chat and just have a great time!
+          = link_to 'Submit a new link!', new_link_path, :class => 'btn btn-large btn-primary'
+        - else
+          %p Welcome traveller! This is Trendy - the newspaper of the Internet. Join us and start sharing your links, comment them and chat with other people!
+          -# = link_to 'Sign up!', new_user_registration_path, :class => 'btn btn-large btn-primary'
+    .col-md-12
+      - flash.each do |name, msg|
+        = content_tag(:div, msg, class: "alert alert-info")
+      #main_content
+        .col-md-12
+          .row
+            .col-md-8
+              = yield
+            .col-md-3
+              - if content_for?(:sidebar)
+                = yield(:sidebar)
       %hr/
       #footer
-        .container
-          %p.muted.credit
-            Created by
-            = succeed "." do
-              %a{:href => "https://github.com/Postmodum37"} Tomukas
+        %p.muted.credit.pull-right
+          Created by
+          = succeed "." do
+            %a{:href => "https://github.com/Postmodum37"} Tomukas
