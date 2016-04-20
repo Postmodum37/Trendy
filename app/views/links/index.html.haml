@@ -1,9 +1,22 @@
 - content_for :sidebar do
   - unless user_signed_in?
-    = render "devise/registrations/new"
+    .div
+      %ul.nav.nav-tabs{:role => "tablist"}
+        %li.active{:role => "presentation"}
+          %a{"aria-controls" => "sign-up", "data-toggle" => "tab", :href => "#sign-up", :role => "tab"} Sign up
+        %li{:role => "presentation"}
+          %a{"aria-controls" => "sign-in", "data-toggle" => "tab", :href => "#sign-in", :role => "tab"} Sign in
+        %li{:role => "presentation"}
+      / Tab panes
+      .tab-content
+        #sign-up.tab-pane.active{:role => "tabpanel"}
+          = render "devise/registrations/new"
+        #sign-in.tab-pane{:role => "tabpanel"}
+          = render "devise/sessions/new"
+
 
 - @links.each do |link|
-  .link.row.clearfix
+  .link
     %h2
       = link_to link.title, link
       %br/
@@ -19,5 +32,8 @@
         %span.glyphicon.glyphicon-chevron-down
           Downvote
           \#{link.get_downvotes.size}
+    %hr
 .flickr_pagination
   = will_paginate @posts, :page_links => true
+
+#modal-window.modal.fade{ "aria-hidden": "true", "role": "dialog"}

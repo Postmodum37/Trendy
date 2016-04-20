@@ -19,15 +19,11 @@
           %nav.collapse.navbar-collapse.navbar-ex1-collapse
             - if user_signed_in?
               %ul.nav.navbar-nav.navbar-right
-                %li= link_to current_user.has_unread? ? "Messages (#{current_user.recieved_messages.where(seen: false).count})" : 'Messages', messages_path
+                %li= link_to current_user.unread? ? "Messages (#{current_user.recieved_messages.where(seen: false).count})" : 'Messages', messages_path
                 %li= link_to 'Submit link', new_link_path
                 %li= link_to 'Account', edit_user_registration_path
                 %li= link_to 'Sign out', destroy_user_session_path, :method => :delete
                 %li= link_to "Welcome, #{current_user.name}", '#'
-            - else
-              %ul.nav.navbar-nav.pull-right
-                -# %li= link_to 'Sign up', new_user_registration_path
-                %li= link_to 'Sign in', new_user_session_path
     .jumbotron
       .container
         %h1 Trendy - Your daily dose of Internet awesomeness!
@@ -36,18 +32,18 @@
           = link_to 'Submit a new link!', new_link_path, :class => 'btn btn-large btn-primary'
         - else
           %p Welcome traveller! This is Trendy - the newspaper of the Internet. Join us and start sharing your links, comment them and chat with other people!
-          -# = link_to 'Sign up!', new_user_registration_path, :class => 'btn btn-large btn-primary'
     .col-md-12
       - flash.each do |name, msg|
         = content_tag(:div, msg, class: "alert alert-info")
       #main_content
         .col-md-12
           .row
-            .col-md-8
+            .col-md-9
               = yield
             .col-md-3
               - if content_for?(:sidebar)
                 = yield(:sidebar)
+              = render 'rules/rules'
       %hr/
       #footer
         %p.muted.credit.pull-right

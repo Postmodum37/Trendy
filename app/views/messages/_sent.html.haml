@@ -1,10 +1,14 @@
-%h3 Sent Messages
-- @sent_messages.each do |message|
-  .col-md-12.message.row.clearfix
-    %h3
-      = link_to message.message_heading, message_path(message)
-      %br/
-      %small.author
-        = "Sent #{time_ago_in_words(message.created_at)} ago."
-.flickr_pagination
-  = will_paginate @sent_messages, :page_links => true
+.panel.panel-default
+  .panel-heading
+    %h3 Sent Messages
+  .panel-body
+    - @sent_messages.each do |message|
+      .col-md-12.message.row.clearfix
+        %h3
+          = link_to message.message_heading, message_path(message)
+          %br/
+          %small.author
+            = "Sent #{time_ago_in_words(message.created_at)} ago."
+          %hr
+    .flickr_pagination
+      = will_paginate @sent_messages, :page_links => true

@@ -4,17 +4,19 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, presence: true, length: { minimum: 4, maximum: 16}, uniqueness: true
-  has_many :links
-  has_many :conversations, :foreign_key => :sender_id
-  has_many :comments
-  has_many :sent_messages, foreign_key: :user_id, class_name: 'Message'
-  has_many :recieved_messages, foreign_key: :recipient_id, class_name: 'Message'
+  validates :name, presence: true, length: { minimum: 4, maximum: 16 }, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 
-  scope :exclude_self, -> term { where.not(id: term)  }
+  has_many :links, dependent: :destroy
+  has_many :conversations, foreign_key: :sender_id
+  has_many :comments, dependent: :destroy
+  has_many :sent_messages, dependent: :destroy, foreign_key: :user_id, class_name: 'Message'
+  has_many :recieved_messages, dependent: :destroy, foreign_key: :recipient_id, class_name: 'Message'
 
-  def has_unread?
+  scope :exclude_self, -> (term) { where.not(id: term) }
+
+  def unread?
     return true if recieved_messages.where(seen: false).count > 0
-    return false
+    false
   end
 end

@@ -1,18 +1,18 @@
-= link_to 'New Message', new_message_path, class: 'btn btn-sm btn-primary'
-%br/
-%br/
-%br/
-
 - content_for :sidebar do
   = render "sent"
 
-%h3 Inbox
-- @recieved_messages.each do |message|
-  .col-md-12.message.row.clearfix
-    %h3
-      = link_to(message.seen ? message.message_heading : message.message_heading + " (New)", message_path(message))
-      %br/
-      %small.author
-        = "Sent #{time_ago_in_words(message.created_at)} ago by #{message.user.name}"
-.flickr_pagination
-  = will_paginate @recieved_messages, :page_links => true
+.panel-default.panel
+  .panel-heading.clearfix
+    %h3.pull-left Inbox
+    = link_to 'New Message', new_message_path, class: 'btn btn-sm btn-primary pull-right new-message'
+  .panel-body
+    - @recieved_messages.each do |message|
+      .col-md-12.message.row.clearfix
+        %h3
+          = link_to(message.seen ? message.message_heading : message.message_heading + " (New)", message_path(message))
+          %br/
+          %small.author
+            = "Sent #{time_ago_in_words(message.created_at)} ago by #{message.user.name}"
+        %hr
+    .flickr_pagination
+      = will_paginate @recieved_messages, :page_links => true
